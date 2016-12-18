@@ -61,4 +61,8 @@ class Song
     song.save
   end
 
+  def display
+    "#{self.artist.name} - #{self.name} - #{self.genre.name}"
+  end
+
 end
