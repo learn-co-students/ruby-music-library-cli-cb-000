@@ -11,9 +11,9 @@ class MusicLibraryController
   def call
     loop do
       input = gets.chomp
-      cmd = input.gsub(' ', '_').to_sym
+      cmd = "do_#{input.gsub(' ', '_')}".to_sym
       begin
-        self.send("do_#{cmd}")
+        self.send(cmd)
       rescue MusicLibraryControllerError
         break
       rescue ArgumentError, NoMethodError
