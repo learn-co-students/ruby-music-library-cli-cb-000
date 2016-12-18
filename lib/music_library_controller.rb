@@ -2,11 +2,10 @@ class MusicLibraryControllerError < StandardError
 end
 
 class MusicLibraryController
-  attr_reader :path, :importer
   def initialize(path=nil)
-    @path = path || './db/mp3s'
-    @importer = MusicImporter.new(@path)
-    @importer.import
+    path ||= './db/mp3s'
+    importer = MusicImporter.new(path)
+    importer.import
   end
 
   def call
@@ -23,10 +22,7 @@ class MusicLibraryController
     end
   end
 
-  def do_exit
-    raise MusicLibraryControllerError
-  end
-
+  # Helper Methods
   def list_songs
     idx = 1
     songs = Song.all.sort_by {|s| s.artist.name.upcase}
@@ -43,6 +39,14 @@ class MusicLibraryController
     end
   end
 
+  def list_genres
+    genres = Genre.all.sort_by {|g| g.name}
+    genres.each do |g|
+      puts g
+    end
+  end
+
+  # Command Methods
   def do_play_song
     puts "Enter song number you would like to play:"
     songs = self.list_songs
@@ -58,13 +62,6 @@ class MusicLibraryController
     artist = Artist.find_by_name(artist_name)
     artist.songs.each do |s|
       puts s
-    end
-  end
-
-  def list_genres
-    genres = Genre.all.sort_by {|g| g.name}
-    genres.each do |g|
-      puts g
     end
   end
 
@@ -87,5 +84,7 @@ class MusicLibraryController
   def do_list_artists
     self.list_artists
   end
-
+  def do_exit
+    raise MusicLibraryControllerError
+  end
 end
