@@ -40,4 +40,8 @@ class Genre
     all_artists = self.songs.collect {|s| s.artist}
     all_artists.uniq
   end
+
+  def to_s
+    self.name
+  end
 end

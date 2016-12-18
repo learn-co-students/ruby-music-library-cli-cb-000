@@ -41,4 +41,8 @@ class Artist
     all_genres.uniq
   end
 
+  def to_s
+    self.name
+  end
+
 end
