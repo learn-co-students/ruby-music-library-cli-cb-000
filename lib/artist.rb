@@ -24,6 +24,11 @@ class Artist
     @songs
   end
 
+  def genres
+    genres_array = @songs.collect{|s| s.genre}
+    genres_array.uniq
+  end
+
   def self.create(name)
     self.new(name).tap {|artist| artist.save}
   end
