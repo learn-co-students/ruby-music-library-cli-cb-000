@@ -26,7 +26,7 @@ class Song
     @@all << self
   end
 
-  def artist=(artist)
+  def artist=(artist) #artist instance Artist class
      @artist = artist
      artist.add_song(self)
   end
@@ -45,6 +45,16 @@ class Song
   end
 
   def self.new_from_filename(name)
-    binding.pry
+    parsed_name = name.split(" - ")
+    parsed_artist = parsed_name[0]
+    song = self.new(parsed_name)
+    song.name = parsed_name[1].split(".")[0]
+    song.artist = Artist.find_or_create_by_name(parsed_artist)
+    song.genre = Genre.find_or_create_by_name(File.basename(parsed_name[parsed_name.length - 1], ".*"))
+    song
+  end
+
+  def self.create_from_filename(name)
+    new_from_filename(name).tap {|song| song.save}
   end
 end
