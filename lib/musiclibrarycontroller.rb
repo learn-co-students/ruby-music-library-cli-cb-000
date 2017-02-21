@@ -34,7 +34,7 @@ class MusicLibraryController
     #in this format "1. <artist> - <song> - <genre>"
     #the each.with_index(1) tells index to start at 1 instead of 0
     counter = 1
-    Song.all.each do |song|
+    Song.all.sort_by{|song| song.artist.name.downcase}.each do |song|
       puts "#{counter}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
       counter += 1
     end
