@@ -12,6 +12,7 @@ describe 'Music Library CLI' do
     expect(output).to include("2. Real Estate - Green Aisles - country")
     expect(output).to include("3. Real Estate - It's Real - hip-hop")
     expect(output).to include("4. Thundercat - For Love I Come - dance")
+  #  expect(output).to include("4. Real Estate - It's Real - hip-hop")
   end
 
   it 'allows a user to list artists' do
