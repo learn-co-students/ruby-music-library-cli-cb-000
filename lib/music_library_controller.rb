@@ -58,20 +58,18 @@ class MusicLibraryController
 	def list_genre
    		puts "What genre by name you like to list songs for?"
    		genre_choice = gets.strip
-	    if genre = Genre.find_by_name(genre_choice)
+	    genre = Genre.find_by_name(genre_choice)
 	        genre.songs.each do |song, index|
-	            puts "#{song.to_string}"
-	       end
+	        puts "#{song.to_string}"
 	    end
 	end
 
 	def list_artist
 		puts "Which artist?"
 		artist_choice = gets.strip
-		if artist = Artist.find_by_name(artist_choice)
+		artist = Artist.find_by_name(artist_choice)
 			artist.songs.each do |song|
-			   puts "#{song.to_string}"
-			end
+		    puts "#{song.to_string}"
 		end
 	end
 
