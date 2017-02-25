@@ -56,7 +56,7 @@ class MusicLibraryController
 	end
 
 	def list_genre
-   		puts "What genre by name you like to list songs for?"
+   		puts "Which genre?"
    		genre_choice = gets.strip
 	    genre = Genre.find_by_name(genre_choice)
 	        genre.songs.each do |song, index|
