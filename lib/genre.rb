@@ -1,6 +1,9 @@
 class Genre
 
   extend Concerns::Findable
+  extend Persistable::ClassMethods
+  extend Nameable
+  include Persistable::InstanceMethods
 
   @@all=[]
 
@@ -14,20 +17,6 @@ class Genre
 
   def self.all
     @@all
-  end
-
-  def self.destroy_all
-    self.all.clear
-  end
-
-  def save
-    @@all << self
-  end
-
-  def self.create(genre)
-    genre=Genre.new(genre)
-    genre.save
-    genre
   end
 
   def artists

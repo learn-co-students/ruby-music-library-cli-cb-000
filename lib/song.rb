@@ -1,6 +1,9 @@
 class Song
 
   extend Concerns::Findable
+  extend Persistable::ClassMethods
+  extend Nameable
+  include Persistable::InstanceMethods
 
   @@all=[]
 
@@ -17,22 +20,6 @@ class Song
 
   def self.all
     @@all
-  end
-
-  def save
-    @@all << self
-  end
-
-  def self.destroy_all
-    self.all.clear
-  end
-
-  def self.create(song_name)
-    # song=self.new(song_name)
-    # song.save
-    # song
-
-    self.new(song_name).tap {|song| song.save}
   end
 
   def artist=(artist)
