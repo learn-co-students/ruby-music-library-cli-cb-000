@@ -1,6 +1,9 @@
 class Song
-  attr_accessor :name, :genre
-  attr_reader :artist
+  include Persistable::InstanceMethods
+  extend Persistable::ClassMethods
+
+  attr_accessor :name
+  attr_reader :artist, :genre
 
   @@all = []
 
@@ -18,14 +21,6 @@ class Song
 
   def self.all
     @@all
-  end
-
-  def self.destroy_all
-    self.all.clear
-  end
-
-  def save
-    self.class.all << self
   end
 
   def artist=(artist)
