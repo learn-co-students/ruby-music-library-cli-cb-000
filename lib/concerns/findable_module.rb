@@ -3,6 +3,7 @@ module Concerns
   module Findable
 
 
+
     def find_or_create_by_name(name)
       if self.find_by_name(name)
         self.find_by_name(name)
@@ -16,9 +17,15 @@ module Concerns
 
     def find_by_name(name)
      self.find(name)
-   end
+    end
 
-  end
+    def find(name)
+      self.all.find {|object| object.name == name}
+    end
+
+
+  
+ end
 
 
 end
