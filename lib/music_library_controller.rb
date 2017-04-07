@@ -9,6 +9,7 @@ def initialize(path = './db/mp3s')
 end
 
 def call
+  puts "What would you like to do?"
   input = ""
   while input != "exit"
 
@@ -33,6 +34,7 @@ end
 
 
 def songs
+  puts "The songs are: "
   @music.sort.each.with_index(1) do |s, i|
 
     puts "#{i}. #{s}"
@@ -40,6 +42,7 @@ def songs
 end
 
 def artists
+  puts "The artists are: "
   @music.sort.each.with_index(1) do |s, i|
     s = s.split(" - ")
     puts "#{i}. #{s[0]}"
@@ -47,7 +50,10 @@ def artists
 end
 
 def list_artist
+  puts "Who's songs are you looking for?"
+
   input = gets.strip
+  puts "Here is a list of the songs by them."
   @music.sort.each.with_index(1) do |s, i|
     x = s.split(" - ")
     puts "#{s}" if input == x[0]
@@ -55,7 +61,10 @@ def list_artist
 end
 
 def list_genre
+  puts "What genres are you looking for?"
+
   input = gets.strip
+  puts "Here is a list of songs in that genre."
   @music.sort.each.with_index(1) do |s, i|
     x = s.split(" - ")
     genre = x[2].split(".")
@@ -64,6 +73,7 @@ def list_genre
 end
 
 def genres
+  puts "The genres are: "
   @music.sort.each.with_index(1) do |s, i|
     s = s.split(" - ")
     puts "#{i}. #{s[2]}"
