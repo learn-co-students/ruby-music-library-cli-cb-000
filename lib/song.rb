@@ -28,4 +28,15 @@ class Song
     genre.songs << self unless genre.songs.include?(self)
   end
 
+  def self.new_from_filename(file)
+    filename = file.split(" - ")
+    Song.new(filename[1],Artist.find_or_create_by_name(filename[0]),Genre.find_or_create_by_name(filename[2].split(".")[0]))
+  end
+
+  def self.create_from_filename(file)
+    song = Song.new_from_filename(file)
+    song.save
+    song
+  end
+
 end

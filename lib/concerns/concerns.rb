@@ -20,6 +20,7 @@ module Concerns
 
     def save
       self.class.all << self
+      self.class.all.flatten
     end
 
 
