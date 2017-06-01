@@ -5,7 +5,7 @@ require_relative './music_importer'
 class Song < Concerns::NameableSaveable
   extend Concerns::Findable::ClassMethods
 
-  class << self  # establishes a block for defining class methods and fields
+  class << self  # establishes a block for defining class methods and fields!
     def new_from_filename(file)
       return MusicImporter.import_file(file) # all file management encapsulated in MusicImporter
     end
