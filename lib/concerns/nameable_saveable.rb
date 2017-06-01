@@ -13,12 +13,11 @@ module Concerns
       # classes are also objects, and so they can have instance variables just like
       # any other object. All you have to do is to remove the extraneous @s. (And you
       # will have to provide an accessor method for the class instance variable.)"
-      
+
     class << self  # establishes a block for defining class methods and fields
-      attr_reader :all
-      def init_all
-        @all = Array.new if @all == nil
-      end
+      
+      attr_reader :all  # can be used here thanks to block established by "class << self"
+      @all = Array.new
 
       def destroy_all()
         @all = Array.new
@@ -33,7 +32,6 @@ module Concerns
     attr_accessor :name
 
     def initialize(name)
-      self.class.init_all
       self.name = name
       self.save
     end
