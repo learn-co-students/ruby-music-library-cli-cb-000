@@ -1,7 +1,9 @@
 require 'bundler'
 Bundler.require
 
-module Concerns
-end
+# module Concerns
+#   module Findable
+#   end
+# end
 
 require_all 'lib'
