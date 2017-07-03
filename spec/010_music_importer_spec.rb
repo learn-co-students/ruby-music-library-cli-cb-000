@@ -1,11 +1,12 @@
 require 'spec_helper'
-
+require 'pry'
+# extend Concerns::Findable
 describe "MusicImporter" do
   describe '#initialize' do
     it 'accepts a file path to parse mp3 files from' do
       test_music_path = "./spec/fixtures/mp3s"
       music_importer = MusicImporter.new(test_music_path)
-
+      # binding.pry
       expect(music_importer.path).to eq(test_music_path)
     end
   end
@@ -53,7 +54,7 @@ describe 'Making Songs from filenames' do
   describe 'Song.create_from_filename' do
     it 'initializes and saves a song based on the filename delimiters' do
       song = Song.create_from_filename("Thundercat - For Love I Come - dance.mp3")
-
+      # binding.pry
       expect(song).to eq(Song.find_by_name("For Love I Come"))
       expect(song.artist).to eq(Artist.find_by_name("Thundercat"))
       expect(song.genre).to eq(Genre.find_by_name("dance"))
@@ -74,11 +75,18 @@ describe "MusicImporter#import" do
   it 'imports the files into the library by creating songs from a filename' do
     test_music_path = "./spec/fixtures/mp3s"
     music_importer = MusicImporter.new(test_music_path)
+
+    # binding.pry
+    # Song.report_on_objects
     music_importer.import
 
-    expect(Song.all.size).to eq(4)
-    expect(Artist.all.size).to eq(3)
-    expect(Genre.all.size).to eq(4)
+
+    # report_on_objects
+    expect(Song.all.size).to eq(4) #Larry Csonka, Green Aisles, It's Real, For Love I Come
+    # binding.pry
+    expect(Genre.all.size).to eq(4) #indie, country, hip-hop, dance
+    expect(Artist.all.size).to eq(3) #Action Bronson, Real Estate, Thundercat
+    # expect(Genre.all.size).to eq(4) #indie, country, hip-hop, dance
 
     expect(Song.find_by_name("Green Aisles").artist.name).to eq("Real Estate")
     expect(Song.find_by_name("Green Aisles").artist.songs.size).to eq(2)

@@ -1,5 +1,5 @@
 require 'spec_helper'
-
+require 'pry'
 describe "Songs and Artists" do
   context 'Artists have many songs' do
     it 'initializes with a songs property set to an empty array' do
@@ -33,7 +33,7 @@ describe "Songs and Artists" do
         song = Song.new("In the Aeroplane Over the Sea")
         artist = Artist.new("Neutral Milk Hotel")
         song.artist = artist
-
+        # binding.pry
         expect(artist.songs).to include(song)
       end
     end
@@ -84,7 +84,6 @@ describe "Songs and Artists" do
         artist = Artist.new("Neutral Milk Hotel")
 
         expect(artist).to receive(:add_song)
-
         song.artist = artist
       end
     end
