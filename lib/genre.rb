@@ -9,6 +9,11 @@ class Genre
     @songs = []
   end
 
+  #-------- Find --------#
+  def artists
+    songs.collect(&:artist).uniq
+  end
+
   #-------- 001 --------#
   def self.all
     @@all

@@ -14,6 +14,11 @@ class Artist
     @songs << song unless @songs.include?(song)
   end
 
+  #-------- Find --------#
+  def genres
+    songs.collect(&:genre).uniq
+  end
+
   #-------- 001 --------#
   def self.all
     @@all
