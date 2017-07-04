@@ -2,9 +2,23 @@
 class Song
   @@all = []
   attr_accessor :name
+  attr_reader :artist, :genre
 
-  def initialize(name)
+  def initialize(name, artist = nil, genre = nil)
     @name = name
+    self.artist = artist if artist
+    self.genre = genre if genre
+  end
+
+  # Cutom setters enable relationships among objects
+  def artist=(name)
+    @artist = name
+    name.add_song(self)
+  end
+
+  def genre=(name)
+    @genre = name
+    name.songs << self unless name.songs.include?(self)
   end
 
   #-------- 001 --------#
