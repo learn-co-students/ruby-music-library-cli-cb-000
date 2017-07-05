@@ -1,6 +1,7 @@
 # Artist class
 class Artist
   extend Concerns::Findable
+
   @@all = []
   attr_accessor :name
   attr_reader :songs
@@ -16,11 +17,13 @@ class Artist
   end
 
   #-------- Find --------#
+
   def genres
     songs.collect(&:genre).uniq
   end
 
   #-------- Memorable --------#
+
   def self.all
     @@all
   end
