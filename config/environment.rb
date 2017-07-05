@@ -1,15 +1,17 @@
 require 'bundler'
 Bundler.require
 
+# Concerns Module
 module Concerns
-  # Class Methods
-  module ClassMethods
-    
-  end
+  # Findable Module
+  module Findable
+    def find_by_name(name)
+      all.detect { |song| song.name == name }
+    end
 
-  # Instance Methods
-  module InstanceMethods
-
+    def find_or_create_by_name(name)
+      find_by_name(name) || create(name)
+    end
   end
 end
 

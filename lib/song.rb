@@ -1,15 +1,15 @@
 # Song class
 class Song
+  extend Concerns::Findable
   @@all = []
   attr_accessor :name
   attr_reader :artist, :genre
-
+  #-------- Initialize --------#
   def initialize(name, artist = nil, genre = nil)
     @name = name
     self.artist = artist if artist
     self.genre = genre if genre
   end
-
   # Cutom setters enable relationships among objects
   def artist=(name)
     @artist = name
@@ -18,20 +18,27 @@ class Song
 
   def genre=(name)
     @genre = name
-    name.songs << self unless name.songs.include?(self)
+    name.songs << self unless @genre.songs.include?(self)
+  end
+  #-------- Find --------#
+  def self.find_by_name(name)
+    all.detect { |song| song.name == name }
   end
 
-  #-------- 001 --------#
+  def self.find_or_create_by_name(name)
+    find_by_name(name) || create(name)
+  end
+  #-------- Memorable --------#
   def self.all
     @@all
   end
 
   def self.destroy_all
-    @@all.clear
+    all.clear
   end
 
   def save
-    @@all << self
+    self.class.all << self
   end
 
   def self.create(name)
