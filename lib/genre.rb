@@ -1,12 +1,14 @@
 class Genre
   extend Concerns::Findable
+  include Concerns::Common::InstanceMethods
+  extend Concerns::Common::ClassMethods
   attr_accessor :name
   attr_reader :songs
 
   @@all = []
 
   def initialize(name)
-    @name = name
+    super(name)
     @songs = []
   end
 
@@ -25,15 +27,18 @@ class Genre
     self.songs.collect {|song| song.artist}.uniq
   end
 
-  def self.destroy_all
-    self.all.clear
-  end
+  # Refactored to Common module
 
-  def save
-    self.class.all << self
-  end
+  # def self.destroy_all
+  #   self.all.clear
+  # end
 
-  def self.create(name)
-    self.new(name).tap {|g| g.save}
-  end
+  # def save
+  #   self.class.all << self
+  # end
+
+  # def self.create(name)
+  #   self.new(name).tap {|g| g.save}
+  # end
+
 end

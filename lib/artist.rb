@@ -4,13 +4,15 @@ require_relative './song.rb'
 
 class Artist
   extend Concerns::Findable
+  include Concerns::Common::InstanceMethods
+  extend Concerns::Common::ClassMethods
   attr_accessor :name
   attr_reader :songs
 
   @@all = []
 
   def initialize(name)
-    @name = name
+    super(name)
     @songs = []
   end
 
@@ -24,22 +26,25 @@ class Artist
     @@all
   end
 
-  def self.destroy_all
-    self.all.clear
-  end
-
-  def save
-    self.class.all << self
-  end
-
   # artist has many unique genres through songs
   def genres
     self.songs.collect{|song| song.genre}.uniq
   end
 
-  def self.create(name)
-    self.new(name).tap{|a| a.save}
-  end
+  # Refactored to Commons module
+
+  # def self.destroy_all
+  #   self.all.clear
+  # end
+
+  # def save
+  #   self.class.all << self
+  # end
+
+  # def self.create(name)
+  #   self.new(name).tap{|a| a.save}
+  # end
+
 end
 
 # binding.pry

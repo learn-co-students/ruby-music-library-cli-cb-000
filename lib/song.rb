@@ -1,16 +1,18 @@
 require 'pry'
 require_relative './genre.rb'
-require_relative 'artist.rb'
+require_relative './artist.rb'
 
 class Song
   extend Concerns::Findable
+  include Concerns::Common::InstanceMethods
+  extend Concerns::Common::ClassMethods
   attr_accessor :name
   attr_reader :artist, :genre
 
   @@all = []
 
   def initialize(name, artist = nil, genre = nil)
-    @name = name
+    super(name)
     # create 'belongs to' song belongs to artist/genre
     self.artist = artist unless artist == nil
     self.genre = genre unless genre == nil
@@ -31,18 +33,19 @@ class Song
     @@all
   end
 
-  def self.destroy_all
-    self.all.clear
-  end
+  # Refactored to Common module
 
-  def save
-    self.class.all << self
-  end
+  # def self.destroy_all
+  #   self.all.clear
+  # end
 
-  #constructor
-  def self.create(name)
-    self.new(name).tap{|s| s.save}
-  end
+  # def save
+  #   self.class.all << self
+  # end
+
+  # def self.create(name)
+  #   self.new(name).tap{|s| s.save}
+  # end
 
   def self.new_from_filename(filename)
     items = filename.split(' - ')
