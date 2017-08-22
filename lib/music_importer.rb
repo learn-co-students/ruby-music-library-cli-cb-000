@@ -7,15 +7,15 @@ class MusicImporter
   end
 
   def files
-
+    files = Dir.entries(@path.to_s).reject { |entry| File.directory?(entry) }
+    files
   end
 
-  def self.new_from_filename(filename)
-
-  end
-
-  def self.create_from_filename
-
+  def import
+    all_files = files
+    all_files.each do |filename|
+      Song.create_from_filename(filename)
+    end
   end
 
 end

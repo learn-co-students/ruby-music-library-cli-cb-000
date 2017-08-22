@@ -36,11 +36,7 @@ class Artist
   end
 
   def genres
-    genres = []
-    @songs.each do |song|
-      genres << song.genre
-    end
-    genres.uniq
+    songs.collect(&:genre).uniq
   end
 
   def find_song(song)

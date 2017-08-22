@@ -11,15 +11,12 @@ class Song
 
   def initialize(name, artist = nil, genre = nil)
     @name = name
-    if artist.nil?
-      @artist = nil
-    else
-      self.artist = artist
-    end
+    self.artist = artist
     self.genre = genre
   end
 
   def artist=(artist)
+    return unless artist.is_a?(Artist)
     @artist = artist
     artist.add_song(self)
   end
@@ -31,7 +28,7 @@ class Song
   end
 
   def save
-    @@all << self
+    self.class.all << self
   end
 
   def self.create(name)
@@ -41,7 +38,7 @@ class Song
   end
 
   def self.destroy_all
-    @@all.clear
+    all.clear
   end
 
   def find_song(song, genre)
@@ -49,19 +46,30 @@ class Song
   end
 
   def self.find_by_name(name)
-    @@all.find(&:name)
+    all.detect{ |s| s.name == name }
   end
 
   def self.find_or_create_by_name(name)
-    return if name.nil?
-    puts "NAME: #{name}"
-    existing_song = find_by_name(name)
-    return if existing_song.nil?
-    puts existing_song.inspect
-    if name != existing_song.name
-      return Song.create(name)
-    else
-      return existing_song
-    end
+    find_by_name(name) || create(name)
   end
+
+  def self.new_from_filename(filename)
+    (artist, name, genre) = File.basename(filename, '.*').split(' - ')
+    # puts "Name: #{name}, Artist: #{artist}, Genre: #{genre}"
+    g = Genre.find_or_create_by_name(genre)
+    a = Artist.find_or_create_by_name(artist)
+    song = Song.find_or_create_by_name(name)
+
+    # binding.pry
+    # puts "Song: #{song}, Artist: #{a}, Genre: #{g}"
+    song.genre = g
+    song.artist = a
+    song
+  end
+
+  def self.create_from_filename(filename)
+    song = Song.new_from_filename(filename)
+    song.save
+  end
+
 end
