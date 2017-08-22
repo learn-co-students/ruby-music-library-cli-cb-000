@@ -1,3 +1,2 @@
-
 class MusicLibraryController
 end
