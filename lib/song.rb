@@ -1,30 +1,31 @@
 class Song
-
   attr_accessor :name
   attr_reader :artist, :genre
 
   @@all = []
 
-  def self.all
-    @@all
-  end
-
   def initialize(name, artist = nil, genre = nil)
     @name = name
-    self.artist = artist
-    self.genre = genre
+    self.artist = artist if artist
+    self.genre = genre if genre
   end
 
   def artist=(artist)
-    return unless artist.is_a?(Artist)
     @artist = artist
     artist.add_song(self)
   end
 
   def genre=(genre)
-    return unless genre.is_a?(Genre)
     @genre = genre
-    genre.songs << self unless find_song(self, genre)
+    genre.songs << self unless genre.songs.include?(self)
+  end
+
+  def self.all
+    @@all
+  end
+
+  def self.destroy_all
+    all.clear
   end
 
   def save
@@ -32,17 +33,9 @@ class Song
   end
 
   def self.create(name)
-    song = Song.new(name)
+    song = new(name)
     song.save
     song
-  end
-
-  def self.destroy_all
-    all.clear
-  end
-
-  def find_song(song, genre)
-    genre.songs.find { |existing_song| existing_song.name == song.name }
   end
 
   def self.find_by_name(name)
@@ -54,22 +47,16 @@ class Song
   end
 
   def self.new_from_filename(filename)
-    (artist, name, genre) = File.basename(filename, '.*').split(' - ')
-    # puts "Name: #{name}, Artist: #{artist}, Genre: #{genre}"
-    g = Genre.find_or_create_by_name(genre)
-    a = Artist.find_or_create_by_name(artist)
-    song = Song.find_or_create_by_name(name)
+    parts = filename.split(" - ")
+    artist_name, song_name, genre_name = parts[0], parts[1], parts[2].gsub(".mp3", "")
 
-    # binding.pry
-    # puts "Song: #{song}, Artist: #{a}, Genre: #{g}"
-    song.genre = g
-    song.artist = a
-    song
+    artist = Artist.find_or_create_by_name(artist_name)
+    genre = Genre.find_or_create_by_name(genre_name)
+
+    new(song_name, artist, genre)
   end
 
   def self.create_from_filename(filename)
-    song = Song.new_from_filename(filename)
-    song.save
+    new_from_filename(filename).tap{ |s| s.save }
   end
-
 end
