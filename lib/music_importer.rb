@@ -1,5 +1,4 @@
 # implements music importer for music library
-require 'pry'
 class MusicImporter
   attr_accessor :path
 
@@ -11,7 +10,7 @@ class MusicImporter
   end
 
   def files
-    files = Dir["#{path}/*"]
+    files = Dir["#{@path}/*"]
     song_names = []
     files.each do |file|
       song_names << file.split(%r{/})[4].lstrip
