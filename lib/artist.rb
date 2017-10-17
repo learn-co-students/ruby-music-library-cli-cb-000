@@ -1,3 +1,5 @@
+require 'pry'
+
 class Artist
   attr_accessor :name, :songs
   @@all = []
@@ -24,12 +26,12 @@ class Artist
   end
 
   def add_song(song)
-    unless song.artist
-      song.artist = self
-      @songs << song
+    songs << song unless songs.include?(song)
+  end
+
+  def genres # returns genres > eg. [punk, rock]
+    songs.collect do |song|
+      song.genre
     end
   end
 end
-
-
-# artist.add_song(artist) # Adds artist to a song

@@ -27,12 +27,16 @@ class Song
   end
 
   def artist=(artist)
-    @artist = artist
-    artist.add_song(self) if artist
+    if artist
+      @artist = artist
+      artist.add_song(self)
+    end
   end
 
   def genre=(genre)
-    @genre = genre
-    genre.add_song(self) if genre
+    if genre
+      @genre = genre
+      genre.add_song(self)
+    end
   end
 end
