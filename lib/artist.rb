@@ -1,6 +1,8 @@
 require 'pry'
 
 class Artist
+  extend Concerns::Findable
+  
   attr_accessor :name, :songs
   @@all = []
 
@@ -25,13 +27,23 @@ class Artist
     self.new(name).tap(&:save)
   end
 
+  # Had trouble here.
+  # Original code had issues with:
+    # def add_song(song)
+    #   songs << song unless songs.include?(song)
+    # end
+  # Also see Song#artist=
+    # if artist
+      #   @artist = artist
+      #   artist.add_song(self)
+      # end
+# Was failing test: expect(song.artist).to be(artist)
   def add_song(song)
-    songs << song unless songs.include?(song)
+    song.artist = self unless song.artist
+    @songs << song unless songs.include?(song)
   end
 
   def genres # returns genres > eg. [punk, rock]
-    songs.collect do |song|
-      song.genre
-    end
+    songs.collect(&:genre).uniq
   end
 end
