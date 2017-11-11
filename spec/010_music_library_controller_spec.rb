@@ -15,7 +15,7 @@ describe "MusicLibraryController" do
     it "the 'path' argument defaults to './db/mp3s'" do
       expect(MusicImporter).to receive(:new).with("./db/mp3s").and_return(double(MusicImporter, import: true))
 
-      MusicLibraryController.new
+      MusicLibraryController.new("./db/mp3s")
     end
 
     it "invokes the #import method on the created MusicImporter object" do
@@ -24,7 +24,7 @@ describe "MusicLibraryController" do
       expect(MusicImporter).to receive(:new).and_return(music_importer)
       expect(music_importer).to receive(:import)
 
-      MusicLibraryController.new
+      MusicLibraryController.new("./db/mp3s")
     end
   end
 
