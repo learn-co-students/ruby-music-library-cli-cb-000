@@ -43,6 +43,7 @@ describe "Associations — Song and Artist:" do
 
     describe "#artist=" do
       it "assigns an artist to the song (song belongs to artist)" do
+
         song.artist = artist
 
         assigned_artist = song.instance_variable_get(:@artist)
