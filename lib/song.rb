@@ -9,6 +9,7 @@ class Song
     @name = name
     self.artist = artist unless artist == nil
     self.genre = genre unless genre == nil
+    self.save
   end
 
   def artist=(artist)
@@ -22,7 +23,7 @@ class Song
   end
 
   def save
-    self.class.all << self
+    self.class.all << self unless self.class.all.detect {|song| song.name == self.name}
   end
 
   def self.all

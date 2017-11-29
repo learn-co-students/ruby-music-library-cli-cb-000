@@ -51,10 +51,7 @@ class MusicLibraryController
 
   def list_songs
     num = 1
-    list = Song.all.uniq.sort_by{|song| song.name}
-#    binding.pry
-    list.each do |song|
-#      puts "#{num}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    Song.all.sort_by{|song| song.name}.each do |song|
       puts "#{num}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
       num += 1
     end
@@ -105,8 +102,8 @@ class MusicLibraryController
    def play_song
      puts "Which song number would you like to play?"
      input = gets.strip.to_i
-     if input >= 1 && input < Song.all.uniq.size
-       list = Song.all.uniq.sort_by!{|song| song.name}
+     if input >= 1 && input < Song.all.size
+       list = Song.all.sort_by{|song| song.name}
        puts "Playing #{list[input-1].name} by #{list[input-1].artist.name}"
      end
    end
