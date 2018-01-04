@@ -1,11 +1,9 @@
 class MusicImporter
   attr_accessor :path
+  attr_reader :files
 
   def initialize(path)
     @path = path
-  end
-
-  def files
     @files = Dir.entries(@path).reject{|entry| entry == "." || entry == ".." || !entry.end_with?(".mp3")}
   end
 
