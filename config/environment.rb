@@ -6,8 +6,9 @@ end
 
 require_all 'lib'
 =begin
-require_relative '../lib/concerns/memorable.rb'
-require_relative '../lib/artist.rb'
-require_relative '../lib/genre.rb'
-require_relative '../lib/song.rb'
+require './lib/concerns/concerns.rb'
+require './lib/artist.rb'
+require './lib/genre.rb'
+require './lib/song.rb'
+require './lib/music_importer.rb'
 =end
