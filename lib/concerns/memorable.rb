@@ -7,8 +7,9 @@ module Concerns
       end
 
       def create(name)
-        self.all << self.new(name)
-        self.new(name)
+        new_instance = self.new(name)
+        self.all << new_instance
+        new_instance
       end
     end
 
