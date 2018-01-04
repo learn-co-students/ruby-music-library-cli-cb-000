@@ -10,7 +10,6 @@ class MusicImporter
   end
 
   def import
-    self.files if @files == nil
     @files.each {|file| Song.create_from_filename(file)}
   end
 
