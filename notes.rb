@@ -19,7 +19,9 @@
       # Songs have one genre
       # Songs can be initialized with an optional genre argument
 
-
+    # Artists & Genres
+      # Artists have many genres through their songs
+      # Genres have many artists through their songs
 
 =begin
   Notes

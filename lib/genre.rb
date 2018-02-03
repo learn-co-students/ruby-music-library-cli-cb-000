@@ -25,4 +25,10 @@ class Genre
   def self.destroy_all
     @@all.clear
   end
+
+  # returns a collection of artists for all of the genre's songs (genre has many artists through songs)
+  # does not return duplicate artists if the genre has more than one song by a particular artist
+  def artists 
+    songs.map { |song| song.artist }.uniq
+  end
 end

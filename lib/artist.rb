@@ -35,4 +35,10 @@ class Artist
     # does not add the song to the current artist's collection of songs if it already exists therein
     @songs << song unless songs.include? song
   end
+
+  # returns a collection of genres for all of the artist's songs (artist has many genres through songs)
+  # does not return duplicate genres if the artist has more than one song of a particular genre
+  def genres 
+    songs.map { |song| song.genre }.uniq
+  end
 end
