@@ -7,7 +7,8 @@ class Genre
     @@all
   end
 
-  def initialize
+  def initialize(name)
+    @name = name
     save
   end
 
