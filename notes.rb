@@ -14,6 +14,11 @@
       # Adding a song to an artist is done by calling an #add_song method on an instance of the Artist class
       # Songs can be initialized with an optional artist argument
 
+    # Songs & Genres
+      # Genres have many songs and are initialized with an empty list of songs
+      # Songs have one genre
+      # Songs can be initialized with an optional genre argument
+
 
 
 =begin
@@ -45,7 +50,7 @@
   def update_params(params)
     params.tap {|p| p[:foo] = 'bar' }
   end
-  
+
   There are dozens of great places to use Object#tap. Just keep your eyes open for methods called on an object that don’t return the object, when you wish that they would.
 
 

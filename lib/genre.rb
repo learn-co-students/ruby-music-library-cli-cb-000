@@ -1,5 +1,5 @@
 class Genre
-  attr_accessor :name
+  attr_accessor :name, :songs
 
   @@all = []
 
@@ -9,6 +9,7 @@ class Genre
 
   def initialize(name)
     @name = name
+    @songs = [] # creates a 'songs' property set to an empty array (genre has many songs)
     save
   end
 
