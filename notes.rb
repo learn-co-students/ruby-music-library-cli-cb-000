@@ -9,19 +9,30 @@
   # all classes should implement a custom constructor .create that instantiates an instance using .new but also invokes #save on that instance, forcing it to persist immediately
 
 # RELATIONSHIPS & ASSOCIATIONS
-    # Songs & Artists
-      # Songs belong to an artist and an artist has many songs
-      # Adding a song to an artist is done by calling an #add_song method on an instance of the Artist class
-      # Songs can be initialized with an optional artist argument
+  # Songs & Artists
+    # Songs belong to an artist and an artist has many songs
+    # Adding a song to an artist is done by calling an #add_song method on an instance of the Artist class
+    # Songs can be initialized with an optional artist argument
 
-    # Songs & Genres
-      # Genres have many songs and are initialized with an empty list of songs
-      # Songs have one genre
-      # Songs can be initialized with an optional genre argument
+  # Songs & Genres
+    # Genres have many songs and are initialized with an empty list of songs
+    # Songs have one genre
+    # Songs can be initialized with an optional genre argument
 
-    # Artists & Genres
-      # Artists have many genres through their songs
-      # Genres have many artists through their songs
+  # Artists & Genres
+    # Artists have many genres through their songs
+    # Genres have many artists through their songs
+
+# FINDING
+  # Implement a generic #find_by_name method that uses the .all method defined by the class to find an instance of the class by name
+  # Implement a generic #find_or_create_by_name method that uses the .all method defined by the class to find an instance of the class by name and to create a new instance if a match is not found
+    # Songs should have a find_by_name method
+    # Songs should have a find_or_create_by_name method
+    # Artist should have a find_by_name method
+    # Artist should have a find_or_create_by_name method
+    # Genre should have a find_by_name method
+    # Genre should have a find_or_create_by_name method
+
 
 =begin
   Notes

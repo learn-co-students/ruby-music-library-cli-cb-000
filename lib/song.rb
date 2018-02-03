@@ -1,4 +1,6 @@
 class Song
+  extend Concerns::Findable
+
   attr_accessor :name
   attr_reader :artist, :genre
 
@@ -43,4 +45,5 @@ class Song
   def self.destroy_all
     @@all.clear
   end
+
 end
