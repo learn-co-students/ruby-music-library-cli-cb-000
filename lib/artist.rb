@@ -1,7 +1,8 @@
 class Artist
   extend Concerns::Findable
-  
-  attr_accessor :name, :songs
+
+  attr_accessor :name
+  attr_reader :songs
 
   @@all = []
 
@@ -40,7 +41,7 @@ class Artist
 
   # returns a collection of genres for all of the artist's songs (artist has many genres through songs)
   # does not return duplicate genres if the artist has more than one song of a particular genre
-  def genres 
+  def genres
     songs.map { |song| song.genre }.uniq
   end
 end

@@ -33,6 +33,17 @@
     # Genre should have a find_by_name method
     # Genre should have a find_or_create_by_name method
 
+# MUSIC IMPORTER
+  # Create a MusicImporter class that works with your Song, Genre, and Artist objects to import a directory of MP3 files
+  # #initialize accepts a file path to a directory of MP3 files
+  # #files returns all of the imported filenames
+  # .import imports all of the files from the library, instantiating a new Song object for each file
+
+  # In SONG class,
+  # Add .new_from_filename, which instantiates a new Song object based on a provided filename
+  # Add .create_from_filename, which does the same thing as .new_from_filename but also saves the newly-created song to the @@all class variable
+
+
 
 =begin
   Notes
