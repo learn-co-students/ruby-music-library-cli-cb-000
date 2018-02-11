@@ -1,5 +1,4 @@
 class Song
-  extend Concerns::Findable
 
   attr_accessor :name
   attr_reader :artist, :genre
@@ -16,7 +15,6 @@ class Song
     @name = name
     self.artist = artist if artist # ensure that associations (song's 'artist' property) are created upon initialization
     self.genre = genre if genre # ensure that associations (song's 'genre' property) are created upon initialization
-    save
   end
 
   # invokes Artist#add_song to add itself to the artist's collection of songs (artist has many songs)
@@ -34,12 +32,20 @@ class Song
   end
 
   def save
-    @@all << self
+    self.class.all << self
   end
 
   def self.create(name)
     # create new object with name --> call save method on object --> return object
-    new(name).tap { |x| x.save }
+    new(name).tap { |s| s.save }
+  end
+
+  def self.find_by_name(name)
+    all.detect{ |s| s.name == name }
+  end
+
+  def self.find_or_create_by_name(name)
+    find_by_name(name) || create(name)
   end
 
   def self.destroy_all

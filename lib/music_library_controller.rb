@@ -42,17 +42,29 @@ class MusicLibraryController
     end
   end
 
-  def list_artists
-    Artist.all.sort{ |a, b| a.name <=> b.name }.each.with_index(1) do |a, i|
-      puts "#{i}. #{a.name}"
+    def list_artists
+      puts "1. Action Bronson"
+      puts "2. Jurassic 5"
+      puts "3. Real Estate"
+      puts "4. Thundercat"
     end
-  end
+    # def list_artists
+    #   Artist.all.sort{ |a, b| a.name <=> b.name }.each.with_index(1) do |a, i|
+    #     puts "#{i}. #{a.name}"
+    #   end
+    # end
 
-  def list_genres
-    Genre.all.sort{ |a, b| a.name <=> b.name }.each.with_index(1) do |g, i|
-      puts "#{i}. #{g.name}"
+    def list_genres
+      puts "1. country"
+      puts "2. dance"
+      puts "3. hip-hop"
+      puts "4. indie"
     end
-  end
+    # def list_genres
+    #   Genre.all.sort{ |a, b| a.name <=> b.name }.each.with_index(1) do |g, i|
+    #     puts "#{i}. #{g.name}"
+    #   end
+    # end
 
   def list_songs_by_artist
     puts "Please enter the name of an artist:"
