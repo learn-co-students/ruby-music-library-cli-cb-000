@@ -1,12 +1,18 @@
 class Artist
+  extend Concerns::Findable
+  include Comparable
+
   attr_accessor :name
   attr_reader   :songs
-  @@all
+  @@all = []
 
   def initialize(name)
     self.name = name
     @songs = []
-    @@all = []
+  end
+
+  def <=>(other)
+    self.name <=> other.name
   end
 
   def self.all

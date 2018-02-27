@@ -1,4 +1,6 @@
 class Song
+  include Comparable
+
   attr_accessor :name
   attr_reader   :artist, :genre
   @@all = []
@@ -7,6 +9,10 @@ class Song
     self.name = name
     self.artist = artist if artist
     self.genre = genre if genre
+  end
+
+  def <=>(other)
+    self.name <=> other.name
   end
 
   def self.all
@@ -38,6 +44,26 @@ class Song
   end
 
   def self.find_by_name(name)
-    self.all.select { |song| song.name == name }[0]
+    self.all.detect { |song| song.name == name }
+  end
+
+  def self.find_or_create_by_name(name)
+    song = Song.find_by_name(name)
+    if song.nil?
+      Song.create(name)
+    else
+      song
+    end
+  end
+
+  def self.new_from_filename(filename)
+    artist, name, genre = filename.split(' - ')
+    Song.new(name,
+      Artist.find_or_create_by_name(artist),
+      Genre.find_or_create_by_name(genre[0..-5]))
+  end
+
+  def self.create_from_filename(filename)
+    self.new_from_filename(filename).tap { |song| song.save }
   end
 end
