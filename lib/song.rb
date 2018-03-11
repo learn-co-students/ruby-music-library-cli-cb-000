@@ -7,7 +7,7 @@ class Song
   def initialize(name, artist = nil)
     @name = name
     @artist = artist
-    @artist = artist(artist)
+    # @artist = artist(artist)
     # self.artist = artist(artist)
 
     # @artist = artist(artist)
@@ -27,9 +27,9 @@ class Song
     # dont see how that's not happening here?
   # if !@artist.nil?
 
-  artist
-  # @artist = artist
-  # artist.add_song(self)
+  # artist
+  @artist = artist
+  artist.add_song(self)
   # end
 end
 
