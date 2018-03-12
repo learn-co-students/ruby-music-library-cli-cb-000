@@ -4,7 +4,7 @@ class Genre
 
   def initialize(name)
     @name = name
-
+    @songs = []
   end
 
   def self.all
@@ -24,5 +24,19 @@ class Genre
 
   def self.destroy_all
     self.all.clear
+  end
+
+  def songs
+    @songs
+  end
+
+  def add_song(song)
+    # if song.genre.nil?
+    # song.genre = self
+
+    if !@songs.include?(song)
+    @songs << song
+  # end
+  end
   end
 end

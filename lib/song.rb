@@ -1,16 +1,21 @@
 class Song
   attr_accessor :name
-  attr_reader :artist
+  # we have custom setters for below
+  attr_reader :artist, :genre
 
   @@all=[]
 
-  def initialize(name, artist = nil)
+  def initialize(name, artist = nil, genre= nil)
     @name = name
+    # @genre = genre
 
-# doesnt make sense
     if !artist.nil?
       # use proper setter syntax!!!
       self.artist = artist
+    end
+    if !genre.nil?
+      # use proper setter syntax!!!
+      self.genre = genre
     end
 
   end
@@ -18,7 +23,12 @@ class Song
   def artist=(artist)
     @artist = artist
     artist.add_song(self)
-end
+  end
+
+  def genre=(genre)
+    @genre = genre
+    genre.add_song(self)
+  end
 
   def self.all
     @@all

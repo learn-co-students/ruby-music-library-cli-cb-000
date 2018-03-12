@@ -79,6 +79,7 @@ describe "Associations — Song and Artist:" do
 
         expect(artist.songs).to include(song)
         expect(artist.songs.size).to be(1)
+
       end
     end
   end
