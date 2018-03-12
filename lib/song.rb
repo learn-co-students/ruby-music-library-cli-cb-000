@@ -6,31 +6,18 @@ class Song
 
   def initialize(name, artist = nil)
     @name = name
-    @artist = artist
-    # @artist = artist(artist)
-    # self.artist = artist(artist)
 
-    # @artist = artist(artist)
-
-    # if !artist.nil?
-  # doesnt make sense
-    # artist(artist)
-  # end
+# doesnt make sense
+    if !artist.nil?
+      # use proper setter syntax!!!
+      self.artist = artist
+    end
 
   end
 
-# investigate this error in ts.rb
-# wrong number of arguments (given 1, expected 0)
   def artist=(artist)
-    # LFFFF
-    # this should assign @artist to the artist obj if it's provided.
-    # dont see how that's not happening here?
-  # if !@artist.nil?
-
-  # artist
-  @artist = artist
-  artist.add_song(self)
-  # end
+    @artist = artist
+    artist.add_song(self)
 end
 
   def self.all
