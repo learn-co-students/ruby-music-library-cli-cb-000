@@ -1,7 +1,7 @@
 class Song
-  attr_accessor :name
+  attr_accessor :name, :artist, :genre
   # we have custom setters for below
-  attr_reader :artist, :genre
+  # attr_reader :artist, :genre
 
   @@all=[]
 
@@ -14,13 +14,13 @@ class Song
       self.artist = artist
     end
     if !genre.nil?
-      # use proper setter syntax!!!
       self.genre = genre
     end
 
   end
 
   def artist=(artist)
+
     @artist = artist
     artist.add_song(self)
   end
@@ -40,7 +40,6 @@ class Song
 
   def self.create(name)
     obj = self.new(name)
-    # should save this specific instance
     obj.save
     obj
   end
