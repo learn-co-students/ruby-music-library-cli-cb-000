@@ -16,7 +16,7 @@ describe "Associations — Artist and Genre:" do
         # has to be something in here for the func to work
         # as if the artist has no current songs ???
         # suppose u can say something is up w/ songs being returned
-        # p artist.songs
+        p artist.songs
         # binding.pry
 
         expect(artist.genres).to include(genre)
