@@ -30,7 +30,7 @@ describe "MusicImporter" do
   end
 end
 
-describe "Song" do
+xdescribe "Song" do
   describe ".new_from_filename" do
     it "initializes a song based on the passed-in filename" do
       song = Song.new_from_filename("Thundercat - For Love I Come - dance.mp3")
@@ -48,13 +48,12 @@ describe "Song" do
       expect(Genre).to receive(:find_or_create_by_name).and_return(genre)
 
       song = Song.new_from_filename("Thundercat - For Love I Come - dance.mp3")
-
       expect(song.artist).to be(artist)
       expect(song.genre).to be(genre)
     end
   end
 
-  describe ".create_from_filename" do
+  xdescribe ".create_from_filename" do
     it "initializes and saves a song based on the passed-in filename" do
       song = Song.create_from_filename("Thundercat - For Love I Come - dance.mp3")
 
@@ -69,8 +68,8 @@ describe "Song" do
   end
 end
 
-describe "MusicImporter" do
-  describe "#import" do
+xdescribe "MusicImporter" do
+  xdescribe "#import" do
     let(:music_importer) { MusicImporter.new("./spec/fixtures/mp3s") }
 
     it "imports the files into the library by invoking Song.create_from_filename" do
