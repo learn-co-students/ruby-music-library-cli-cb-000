@@ -1,6 +1,4 @@
 class Genre
-  #extend Concerns::Findable::ClassMethods
-  #include Concerns::Findable::InstanceMethods
   extend Concerns::Findable
 
   attr_accessor :name, :songs
@@ -9,7 +7,6 @@ class Genre
   def initialize(name)
     @name = name
     @songs = []
-    #save
   end
 
   def self.all
@@ -40,8 +37,9 @@ class Genre
 #  end
 
   def artists
-    #self.songs.collect { |s| s.artist }.uniq
-    @songs.collect { |s| s.artist }.uniq
+#    self.songs.collect { |s| s.artist }.uniq
+#    @songs.collect { |s| s.artist }.uniq
+    songs.collect { |s| s.artist }.uniq
   end
 
 end
