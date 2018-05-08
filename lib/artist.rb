@@ -41,7 +41,14 @@ class Artist
     else
       # do not assign self to song.artist
     end
-    
+  end
+  
+  def genres
+    collectorArray = []
+    @songs.each do |song_object|
+      collectorArray << song_object.genre
+    end
+    return collectorArray.uniq
   end
   
 end

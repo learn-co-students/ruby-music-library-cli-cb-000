@@ -34,4 +34,12 @@ class Genre
     return @songs
   end
   
+  def artists
+    collectorArray = []
+    @songs.each do |song_element|
+      collectorArray << song_element.artist
+    end
+    return collectorArray.uniq
+  end
+  
 end

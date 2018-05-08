@@ -5,13 +5,17 @@ class Song
   def initialize(name, artist = nil, genre = nil)
     @name = name
     @@all = []
-    #@artist = artist
-    if !(artist == nil)
+    if !(artist == nil) # @artist = artist
       artist.add_song(self)
     else
       # do nothing
     end
-    @genre = genre
+    
+    if !(genre == nil) # @genre = genre
+      self.genre = genre
+    else
+      # do nothing
+    end
   end
   
   def name=(name)
@@ -49,8 +53,27 @@ class Song
     else
       genre.songs << self
     end
-
   end
+  
+  def self.find_by_name(song_name)
+    @@all.each do |song_object|
+      if song_object.name = song_name
+        return song_object
+      else
+        return nil
+      end
+    end
+  end
+  
+  def self.find_or_create_by_name(song_name)
+    if (self.find_by_name(song_name))
+      return self.find_by_name(song_name)
+    else
+      # do nothing
+    end
+    self.create(song_name)
+  end
+  
   
 end
 
