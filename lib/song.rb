@@ -55,26 +55,36 @@ class Song
     end
   end
   
-  def self.find_by_name(song_name)
-    @@all.each do |song_object|
-      if song_object.name = song_name
-        return song_object
-      else
-        return nil
-      end
-    end
+  # def self.find_by_name(name)
+  #   @@all.each do |song_object|
+  #     if song_object.name = name
+  #       return song_object
+  #     else
+  #       return nil
+  #     end
+  #   end
+  # end
+  
+  # def self.find_or_create_by_name(song_name)
+  #   if (self.find_by_name(song_name))
+  #     return self.find_by_name(song_name)
+  #   else
+  #     # do nothing
+  #   end
+  #   self.create(song_name)
+  # end
+  
+  def self.find_by_name(name)
+    @@all.find { |song| song.name == name }
   end
   
-  def self.find_or_create_by_name(song_name)
-    if (self.find_by_name(song_name))
-      return self.find_by_name(song_name)
-    else
-      # do nothing
-    end
-    self.create(song_name)
+  def self.find_or_create_by_name(name)
+    self.find_by_name(name) ? self.find_by_name(name) : self.create(name)
   end
   
-  
+  def self.new_from_filename
+  end
+
 end
 
 
