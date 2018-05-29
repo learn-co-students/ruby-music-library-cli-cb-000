@@ -1,10 +1,21 @@
 class Genre
 
-  attr_accessor :name
+  extend Concerns::Findable
+
+  attr_accessor :name, :songs
   @@all = []
 
   def initialize(name)
     @name = name
+    @songs = []
+  end
+
+  def artists
+    artists = []
+    self.songs.each do |hees|
+      artists << hees.artist unless artists.include? hees.artist
+    end
+    return artists
   end
 
   def self.all
