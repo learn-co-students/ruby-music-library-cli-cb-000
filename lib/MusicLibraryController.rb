@@ -1,6 +1,7 @@
+require 'pry'
 class MusicLibraryController
 
-  attr_reader :music_importer
+  attr_accessor :music_importer
   # @list_songs = []
 
   def initialize(path = "./db/mp3s")
@@ -37,6 +38,54 @@ class MusicLibraryController
        end
      end
 
+     def az_list
+        name_list = []
+        Song.all.each do |song|
+          name_list << song.name
+        end
+        name_list.sort!
+        @ascending_list = []
+        name_list.each do |name|
+          song = Song.find_by_name(name)
+          @ascending_list << song
+        end
+      end
+
+    def list_songs
+      self.az_list
+      counter = 0
+      @ascending_list.each do |song|
+        counter += 1
+        puts "#{counter}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+      end
+    end
+
+
+    def list_artists
+      art_list = []
+      Artist.all.each do |artist|
+        art_list << artist.name
+      end
+      art_list.sort!
+      counter = 0
+      art_list.each do |name|
+        counter += 1
+        puts "#{counter}. #{name}"
+      end
+    end
+
+    def list_genres
+      gen_list = []
+      Genre.all.each do |genre|
+        gen_list << genre.name
+      end
+      gen_list.sort!
+      counter = 0
+      gen_list.each do |name|
+        counter += 1
+        puts "#{counter}. #{name}"
+      end
+    end
 
 
 end
