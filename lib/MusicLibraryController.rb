@@ -1,7 +1,7 @@
 require 'pry'
 class MusicLibraryController
 
-  attr_accessor :music_importer
+  attr_accessor :importer, :art_list
   # @list_songs = []
 
   def initialize(path = "./db/mp3s")
@@ -87,5 +87,52 @@ class MusicLibraryController
       end
     end
 
+    def list_songs_by_artist
+      puts "Please enter the name of an artist:"
+      input = gets.chomp
+      artist = Artist.find_by_name(input)
+      return if artist == nil
+      songs = artist.songs
+      name_list = []
+      songs.each do |song|
+        name_list << song.name
+      end
+      name_list.sort!
+      i = 0
+      name_list.each do |name|
+        i+= 1
+        song = Song.find_by_name(name)
+        puts "#{i}. #{song.name} - #{song.genre.name}"
+      end
+    end
+
+    def list_songs_by_genre
+      puts "Please enter the name of a genre:"
+      input = gets.chomp
+      genre = Genre.find_by_name(input)
+      return if genre == nil
+      songs = genre.songs
+      name_list = []
+      songs.each do |song|
+        name_list << song.name
+      end
+      name_list.sort!
+      i = 0
+      name_list.each do |name|
+        i+= 1
+        song = Song.find_by_name(name)
+        puts "#{i}. #{song.artist.name} - #{song.name}"
+      end
+    end
+
+    def play_song
+      puts "Which song number would you like to play?"
+      input = gets.chomp.to_i
+      return if (input > Song.all.size || input < 1)
+      self.az_list
+      song_name = @ascending_list [input-1].name
+      artist_name = @ascending_list [input-1].artist.name
+      puts "Playing #{song_name} by #{artist_name}"
+    end
 
 end
