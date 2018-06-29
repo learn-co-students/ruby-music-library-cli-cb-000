@@ -1,3 +1,5 @@
+require "pry"
+
 class MusicLibraryController
 
     attr_accessor :path, :new_music
@@ -22,20 +24,19 @@ class MusicLibraryController
             puts("To quit, type 'exit'.")
             puts("What would you like to do?")
             user_input = gets
+            execute_command(user_input)
         end
     end
 
-    def split_list
-        parsed_list = []
-        @new_music.files.each {|file|
-            parsed_list << file.split(" - ")}
-        parsed_list
+    def execute_command(input)
+        parse = input.split(" ")
+        send(parse.join("_"))
     end
 
     def list_songs
-        alph_list = split_list.sort_by{|elem| elem[1]}
-        alph_list.each_with_index {|song, index|
-            puts "#{index + 1}. #{song.join(" - ")}" }
+        song_list = Song.all.sort_by{|song| song.name}
+        song_list.each_with_index {|s,i|
+        puts "#{i+1}. #{s.artist.name} - #{s.name} - #{s.genre.name}"}
     end
 
     def list_artists
@@ -53,13 +54,34 @@ class MusicLibraryController
     def list_songs_by_artist
         puts "Please enter the name of an artist:"
         user_input = gets
-        new_list = split_list.collect{|elem| elem[0] == user_input}
-        puts new_list
-        if new_list.size != 0
-            sorted_list = new_list.sort_by{|elem| elem[0]}
-            puts sorted_list
-            sorted_list.each_with_index { |e, i|
-                puts "#{i+1}. #{e[0] - e[2]}"}
+        artist_list = Song.all.delete_if{|song| song.artist.name != user_input}
+        if artist_list.size != 0
+            sorted_list = artist_list.sort_by{|elem| elem.name}
+            sorted_list.each_with_index{|e,i|
+            puts "#{i+1}. #{e.name} - #{e.genre.name}"}
+        end
+    end
+
+    def list_songs_by_genre
+        puts "Please enter the name of a genre:"
+        user_input = gets
+        genre_list = Song.all.delete_if{|song| song.genre.name != user_input}
+        if genre_list.size != 0
+            sorted_list = genre_list.sort_by{|elem| elem.name}
+            sorted_list.each_with_index{|e,i|
+            puts "#{i+1}. #{e.artist.name} - #{e.name}"}
+        end
+    end
+
+    def play_song
+        song_list = Song.all.sort_by{|song| song.name}
+        user_input = ''
+        num_songs = (1..song_list.count)
+        puts "Which song number would you like to play?"
+        user_input = gets
+        if num_songs.include?(user_input.to_i)
+            song = song_list[(user_input.to_i) - 1]
+            puts "Playing #{song.name} by #{song.artist.name}"
         end
     end
 

@@ -59,7 +59,7 @@ class Song
         parsed = filename.split(" - ")
         artist = parsed[0]
         song_title = parsed[1]
-        genre = parsed[2]
+        genre = parsed[2].chomp(".mp3")
         new_song = self.find_by_name(song_title)
 
         if !new_song
