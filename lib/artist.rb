@@ -35,11 +35,7 @@ class Artist
     end
 
     def genres
-        genre_collection = []
-        @songs.each do |song|
-            genre_collection << song.genre if !genre_collection.include?(song.genre)
-        end
-        genre_collection
+        @songs.collect{|s| s.genre}.uniq
     end
 
 end

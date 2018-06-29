@@ -54,7 +54,7 @@ class MusicLibraryController
     def list_songs_by_artist
         puts "Please enter the name of an artist:"
         user_input = gets
-        artist_list = Song.all.delete_if{|song| song.artist.name != user_input}
+        artist_list = Artist.find_by_name(user_input).songs
         if artist_list.size != 0
             sorted_list = artist_list.sort_by{|elem| elem.name}
             sorted_list.each_with_index{|e,i|
