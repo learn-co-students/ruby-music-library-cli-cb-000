@@ -1,5 +1,6 @@
-#!/usr/bin/env ruby
-
-require_relative '../config/environment'
-
-MusicLibraryController.new.call
+controller = MusicLibraryController.new
+controller.call
+input = gets.chomp
+if input == "list songs"
+  controller.list_songs
+end
