@@ -9,6 +9,7 @@ class MusicLibraryController
   end
 
   def call
+
     puts "Welcome to your music library!"
     puts "To list all of your songs, enter 'list songs'."
     puts "To list all of the artists in your library, enter 'list artists'."
@@ -19,10 +20,12 @@ class MusicLibraryController
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
     input = gets.chomp
+    accepted_input = ["list songs", "list artists", "list genres", "list artist", "list genre", "play song", "exit"]
 
-    if input != 'exit'
+    unless accepted_input.include?(input)
       call
     end
+    selection(input)
   end
 
   def list_songs
@@ -79,5 +82,23 @@ class MusicLibraryController
     Song.all.sort! { |x,y| x.name <=> y.name }
   end
 
+  def selection(input)
+    case input
+    when "list songs"
+      list_songs
+    when "list artists"
+      list_artists
+    when "list genres"
+      list_genres
+    when "list artist"
+      list_songs_by_artist
+    when "list genre"
+      list_songs_by_genre
+    when "play song"
+      play_song
+    when "exit"
+      exit
+    end
+  end
 end
 # binding.pry
