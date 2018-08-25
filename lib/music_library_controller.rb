@@ -1,4 +1,3 @@
-require 'pry'
 class MusicLibraryController
 
   attr_accessor :path
@@ -24,7 +23,7 @@ class MusicLibraryController
 
       answer = gets.chomp
 
-      case answer
+        case answer
         when "list songs"
           list_songs
         when "list artists"
@@ -38,7 +37,6 @@ class MusicLibraryController
         when "play song"
           play_song
         end
-      
     end
   end
 
