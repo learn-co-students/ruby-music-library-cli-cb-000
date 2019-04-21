@@ -16,7 +16,7 @@ class MusicLibraryController
     puts "To play a song, enter 'play song'."
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
-    # user_input = gets.chomp
+    # user_input = gets.strip
     # counter = 1
     # if user_input != "exit"
     #   until counter > 3
@@ -41,6 +41,25 @@ class MusicLibraryController
         counter +=1
       end
     end
+  end
+
+  def listed_songs_array
+    names_array = []
+    imports = @new_music_importer.import
+    imports.each do |imported_song|
+      names_array << imported_song.name
+    end
+    alpha_array = names_array.sort
+    counter = 1
+    final_array = []
+    if alpha_array != []
+      alpha_array.each do |song_name|
+        song_variable = Song.find_by_name(song_name)
+        final_array << song_variable
+        counter +=1
+      end
+    end
+    final_array
   end
 
   # def list_artists
@@ -192,19 +211,50 @@ class MusicLibraryController
     end
   end
 
-  # def list_songs_by_artist
-  #   puts "Please enter the name of an artist:"
-  #   artist_name = gets.chomp
-  #   artist_object = Artist.find_by_name(artist_name)
-  #   counter = 1
-  #   if artist_object == nil
-  #     self.list_songs_by_artist
-  #   else
-  #     artist_object.songs.each do |song|
-  #       puts "#{counter}. #{song.name} - #{song.genre.name}"
-  #       counter += 1
-  #     end
-  #   end
-  # end
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    artist_name = gets.strip
+    artist_object = Artist.find_by_name(artist_name)
+    counter = 1
+    if artist_object == nil
+      self.list_songs_by_artist
+    else
+      artist_object.songs.each do |song|
+        puts "#{counter}. #{song.name} - #{song.genre.name}"
+        counter += 1
+      end
+    end
+  end
+
+  def list_songs_by_genre
+    puts "Please enter the name of an genre:"
+    genre_name = gets.strip
+    genre_object = Genre.find_by_name(genre_name)
+    counter = 1
+    if genre_object == nil
+      self.list_songs_by_genre
+    else
+      genre_object.songs.each do |song|
+        puts "#{counter}. #{}#{song.name}"
+        counter += 1
+      end
+    end
+  end
+
+  def play_song
+    self.list_songs
+    puts "Which song number would you like to play?"
+    number_input = gets.strip
+    number = number_input.to_i
+    if number > 0 && number <= @new_music_importer.import.count
+      adjusted_value = number - 1
+      song_object = self.listed_songs_array[adjusted_value]
+      puts "Playing #{song_object.name} by #{song_object.artist.name}"
+    else
+      self.play_song
+    end
+  end
+
+
 
 end
