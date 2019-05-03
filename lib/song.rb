@@ -128,11 +128,11 @@ class Song
     new_song
   end
 
-  def self.create_from_filename(filename)
-    new_song = Song.new_from_filename(filename)
-    new_song.save
-    new_song.filename = filename
-    new_song
+  def self.create_from_filename(filename_input)
+    new_song_variable = Song.new_from_filename(filename_input)
+    new_song_variable.save
+    # new_song_variable.filename = filename_input
+    new_song_variable
   end
 
   def filename=(filename)
