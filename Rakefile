@@ -1,5 +1,7 @@
 require_relative './config/environment'
 
+require 'pry'
+
 def reload!
   load_all "./config" if Dir.exists?("./config")
   load_all "./app" if Dir.exists?("./app")
