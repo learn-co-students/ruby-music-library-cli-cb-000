@@ -9,8 +9,15 @@ describe "Associations — Artist and Genre:" do
   context "Artist" do
     describe "#genres" do
       it "returns a collection of genres for all of the artist's songs (artist has many genres through songs)" do
+        #
+        # Song.new("The Luckiest Guy on the Lower East Side", artist, genre)
         Song.new("The Luckiest Guy on the Lower East Side", artist, genre)
         Song.new("Long-Forgotten Fairytale", artist, other_genre)
+        # has to be something in here for the func to work
+        # as if the artist has no current songs ???
+        # suppose u can say something is up w/ songs being returned
+        p artist.songs
+        # binding.pry
 
         expect(artist.genres).to include(genre)
         expect(artist.genres).to include(other_genre)
